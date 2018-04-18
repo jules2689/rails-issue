@@ -1,24 +1,19 @@
-# README
+# Issue demonstration
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[This commit](https://github.com/rails/rails/commit/68fe6b08ee72cc47263e0d2c9ff07f75c4b42761) was intended to fix an issue with casting.
 
-Things you may want to cover:
+However, it seems that, with MySQL this issue continues to occur. In the octobox app, I get
 
-* Ruby version
+```
+NotificationsControllerTest#test_archives_respects_current_filters:
+ActiveRecord::StatementInvalid: Mysql2::Error: Truncated incorrect DOUBLE value: 'true': UPDATE `notifications` SET `notifications`.`archived` = TRUE WHERE `notifications`.`user_id` = 7 AND `notifications`.`archived` = FALSE AND `notifications`.`unread` = 'true'
+    app/controllers/notifications_controller.rb:135:in `archive_selected'
+    test/controllers/notifications_controller_test.rb:198:in `block in <class:NotificationsControllerTest>'
+```
 
-* System dependencies
+To see the issue, start your mysql server and:
 
-* Configuration
+1. Run `bin/rails db:setup`
+2. Run `bin/rails test`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The tests illustrate the issue
