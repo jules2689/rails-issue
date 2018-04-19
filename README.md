@@ -11,9 +11,6 @@ ActiveRecord::StatementInvalid: Mysql2::Error: Truncated incorrect DOUBLE value:
     test/controllers/notifications_controller_test.rb:198:in `block in <class:NotificationsControllerTest>'
 ```
 
-To see the issue, start your mysql server and:
-
-1. Run `bin/rails db:setup`
-2. Run `bin/rails test`
+To see the issue, start your mysql server and run `ruby bug_mysql.rb`. `ruby bug_sqlite.rb` shows a different one, and `ruby bug_postgres.rb` works entirely.
 
 The tests illustrate the issue
